@@ -8,6 +8,7 @@ interface ParamsTypes {
   page: number;
   perPage: number;
   search?: string;
+  tag?: string;
 }
 
 interface FetchNotesValues {
@@ -17,17 +18,24 @@ interface FetchNotesValues {
 
 export async function fetchNotes(
   search: string,
+  tag: string,
   page: number
-): Promise<FetchNotesValues | undefined> {
+): Promise<FetchNotesValues> {
   try {
     const perPage = 12;
     const params: ParamsTypes = {
+      tag,
       page,
       perPage,
     };
+
     if (search?.trim()) {
       params.search = search;
     }
+    if (tag?.trim()) {
+      params.tag = tag;
+    }
+
     const res = await axios.get<FetchNotesValues>("/notes", {
       params,
       headers: {
@@ -36,7 +44,9 @@ export async function fetchNotes(
     });
     return res.data;
   } catch (error) {
-    toast.error(error instanceof Error ? error.message : String(error));
+    const message = error instanceof Error ? error.message : String(error);
+    toast.error(message);
+    throw new Error(message);
   }
 }
 
@@ -44,7 +54,7 @@ export async function createNote({
   title,
   content,
   tag,
-}: CreateNoteValues): Promise<Note | undefined> {
+}: CreateNoteValues): Promise<Note> {
   try {
     const params: CreateNoteValues = {
       title,
@@ -59,11 +69,13 @@ export async function createNote({
     });
     return res.data;
   } catch (error) {
-    toast.error(error instanceof Error ? error.message : String(error));
+    const message = error instanceof Error ? error.message : String(error);
+    toast.error(message);
+    throw new Error(message);
   }
 }
 
-export async function deleteNote(id: number): Promise<Note | undefined> {
+export async function deleteNote(id: number): Promise<Note> {
   try {
     const res = await axios.delete<Note>(`/notes/${id}`, {
       headers: {
@@ -72,13 +84,13 @@ export async function deleteNote(id: number): Promise<Note | undefined> {
     });
     return res.data;
   } catch (error) {
-    toast.error(error instanceof Error ? error.message : String(error));
+    const message = error instanceof Error ? error.message : String(error);
+    toast.error(message);
+    throw new Error(message);
   }
 }
 
-export default async function fetchNoteId(
-  id: number
-): Promise<Note | undefined> {
+export default async function fetchNoteId(id: number): Promise<Note> {
   try {
     const res = await axios.get<Note>(`notes/${id}`, {
       headers: {
@@ -87,6 +99,8 @@ export default async function fetchNoteId(
     });
     return res.data;
   } catch (error) {
-    toast.error(error instanceof Error ? error.message : String(error));
+    const message = error instanceof Error ? error.message : String(error);
+    toast.error(message);
+    throw new Error(message);
   }
 }

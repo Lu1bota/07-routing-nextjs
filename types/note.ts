@@ -14,3 +14,8 @@ export interface CreateNoteValues {
 }
 
 type Tag = "Work" | "Personal" | "Meeting" | "Shopping" | "Todo";
+
+export interface FetchNotesValues {
+  notes: Note[];
+  totalPages: number;
+}

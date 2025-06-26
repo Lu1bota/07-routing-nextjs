@@ -19,7 +19,7 @@ export default function TagsMenu() {
         <ul className={css.menuList}>
           <li className={css.menuItem}>
             <Link
-              href={`notes/filter/all`}
+              href={`/notes/filter/all`}
               className={css.menuLink}
               onClick={toogle}
             >
@@ -28,7 +28,7 @@ export default function TagsMenu() {
           </li>
           <li className={css.menuItem}>
             <Link
-              href={`notes/filter/Work`}
+              href={`/notes/filter/Work`}
               className={css.menuLink}
               onClick={toogle}
             >
@@ -37,7 +37,7 @@ export default function TagsMenu() {
           </li>
           <li className={css.menuItem}>
             <Link
-              href={`notes/filter/Personal`}
+              href={`/notes/filter/Personal`}
               className={css.menuLink}
               onClick={toogle}
             >
@@ -46,7 +46,7 @@ export default function TagsMenu() {
           </li>
           <li className={css.menuItem}>
             <Link
-              href={`notes/filter/Meeting`}
+              href={`/notes/filter/Meeting`}
               className={css.menuLink}
               onClick={toogle}
             >
@@ -55,7 +55,7 @@ export default function TagsMenu() {
           </li>
           <li className={css.menuItem}>
             <Link
-              href={`notes/filter/Shopping`}
+              href={`/notes/filter/Shopping`}
               className={css.menuLink}
               onClick={toogle}
             >
@@ -64,7 +64,7 @@ export default function TagsMenu() {
           </li>
           <li className={css.menuItem}>
             <Link
-              href={`notes/filter/Todo`}
+              href={`/notes/filter/Todo`}
               className={css.menuLink}
               onClick={toogle}
             >

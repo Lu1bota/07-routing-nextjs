@@ -11,17 +11,20 @@ import SearchBox from "@/components/SearchBox/SearchBox";
 import Pagination from "@/components/Pagination/Pagination";
 import NoteList from "@/components/NoteList/NoteList";
 import NoteModal from "@/components/NoteModal/NoteModal";
+import { FetchNotesValues } from "@/types/note";
 
 interface NotesClientProps {
   initialQuery: string;
   initialPage: number;
-  initialTag: string;
+  initialTag?: string;
+  initialData: FetchNotesValues;
 }
 
 export default function NotesClient({
   initialQuery,
   initialPage,
   initialTag,
+  initialData,
 }: NotesClientProps) {
   const [query, setQuery] = useState<string>(initialQuery);
   const [currentPage, setCurrentPage] = useState<number>(initialPage);
@@ -30,9 +33,10 @@ export default function NotesClient({
 
   const { data, isLoading, isError, error, isSuccess } = useQuery({
     queryKey: ["notes", debounceQuery, initialTag, currentPage],
-    queryFn: () => fetchNotes(debounceQuery, initialTag, currentPage),
+    queryFn: () => fetchNotes(debounceQuery, currentPage, initialTag),
     placeholderData: keepPreviousData,
     refetchOnMount: false,
+    initialData,
   });
 
   function toggleModal() {

@@ -17,7 +17,7 @@ interface NotesClientProps {
   initialQuery: string;
   initialPage: number;
   initialTag?: string;
-  initialData: FetchNotesValues;
+  initialData: FetchNotesValues | undefined;
 }
 
 export default function NotesClient({

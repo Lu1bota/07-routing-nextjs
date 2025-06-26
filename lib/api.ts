@@ -1,6 +1,6 @@
 import axios from "axios";
 import type { CreateNoteValues, FetchNotesValues, Note } from "../types/note";
-import toast from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 axios.defaults.baseURL = "https://notehub-public.goit.study/api";
 
@@ -15,7 +15,7 @@ export async function fetchNotes(
   search: string,
   page: number,
   tag: string | undefined
-): Promise<FetchNotesValues> {
+): Promise<FetchNotesValues | undefined> {
   try {
     const perPage = 12;
     const params: ParamsTypes = {
@@ -39,9 +39,7 @@ export async function fetchNotes(
     });
     return res.data;
   } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    toast.error(message);
-    throw new Error(message);
+    toast.error(error instanceof Error ? error.message : String(error));
   }
 }
 
@@ -49,7 +47,7 @@ export async function createNote({
   title,
   content,
   tag,
-}: CreateNoteValues): Promise<Note> {
+}: CreateNoteValues): Promise<Note | undefined> {
   try {
     const params: CreateNoteValues = {
       title,
@@ -64,13 +62,11 @@ export async function createNote({
     });
     return res.data;
   } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    toast.error(message);
-    throw new Error(message);
+    toast.error(error instanceof Error ? error.message : String(error));
   }
 }
 
-export async function deleteNote(id: number): Promise<Note> {
+export async function deleteNote(id: number): Promise<Note | undefined> {
   try {
     const res = await axios.delete<Note>(`/notes/${id}`, {
       headers: {
@@ -79,13 +75,13 @@ export async function deleteNote(id: number): Promise<Note> {
     });
     return res.data;
   } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    toast.error(message);
-    throw new Error(message);
+    toast.error(error instanceof Error ? error.message : String(error));
   }
 }
 
-export default async function fetchNoteId(id: number): Promise<Note> {
+export default async function fetchNoteId(
+  id: number
+): Promise<Note | undefined> {
   try {
     const res = await axios.get<Note>(`notes/${id}`, {
       headers: {
@@ -94,8 +90,6 @@ export default async function fetchNoteId(id: number): Promise<Note> {
     });
     return res.data;
   } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    toast.error(message);
-    throw new Error(message);
+    toast.error(error instanceof Error ? error.message : String(error));
   }
 }

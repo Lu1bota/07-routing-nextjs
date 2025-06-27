@@ -1,4 +1,4 @@
-import Modal from "@/components/NoteModal/NoteModal";
+import Modal from "@/components/Modal/Modal";
 import NotePreview from "@/components/NotePreview/NotePreview";
 import fetchNoteId from "@/lib/api";
 

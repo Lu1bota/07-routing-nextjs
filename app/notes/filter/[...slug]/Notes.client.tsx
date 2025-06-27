@@ -12,6 +12,7 @@ import Pagination from "@/components/Pagination/Pagination";
 import NoteList from "@/components/NoteList/NoteList";
 import NoteModal from "@/components/NoteModal/NoteModal";
 import { FetchNotesValues } from "@/types/note";
+import NoteForm from "@/components/NoteForm/NoteForm";
 
 interface NotesClientProps {
   initialQuery: string;
@@ -74,7 +75,11 @@ export default function NotesClient({
 
       {isError && <ErrorMessage error={error} />}
       {isSuccess && <NoteList notes={notesRequest} />}
-      {isModalOpen && <NoteModal onClose={closeModal} />}
+      {isModalOpen && (
+        <NoteModal>
+          <NoteForm onClose={closeModal} />
+        </NoteModal>
+      )}
     </div>
   );
 }

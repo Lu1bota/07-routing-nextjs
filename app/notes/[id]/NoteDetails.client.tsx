@@ -30,9 +30,9 @@ export default function NoteDetailsClient() {
           <div className={css.item}>
             <div className={css.header}>
               <h2>{note.title}</h2>
-              <p className={css.tag}>{String(note.tag)}</p>
               <button className={css.editBtn}>Edit note</button>
             </div>
+            <p className={css.tag}>{String(note.tag)}</p>
             <p className={css.content}>{note.content}</p>
             <p className={css.date}>Created date: {note.createdAt}</p>
           </div>

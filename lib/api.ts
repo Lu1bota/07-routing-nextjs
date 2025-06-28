@@ -79,7 +79,7 @@ export async function deleteNote(id: number): Promise<Note | undefined> {
   }
 }
 
-export default async function fetchNoteId(
+export default async function fetchNoteById(
   id: number
 ): Promise<Note | undefined> {
   try {
